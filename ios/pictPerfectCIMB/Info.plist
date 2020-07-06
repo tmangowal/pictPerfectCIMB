@@ -38,7 +38,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>SplashScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -53,7 +53,53 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-  <key>UIStatusBarStyle</key>
-  <string>UIStatusBarStyleDefault</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AntDesign.ttf</string>
+		<string>Entypo.ttf</string>
+		<string>EvilIcons.ttf</string>
+		<string>Feather.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>FontAwesome5_Brands.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>FontAwesome5_Solid.ttf</string>
+		<string>Fontisto.ttf</string>
+		<string>Foundation.ttf</string>
+		<string>Ionicons.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>MaterialIcons.ttf</string>
+		<string>Octicons.ttf</string>
+		<string>Roboto_medium.ttf</string>
+		<string>Roboto.ttf</string>
+		<string>rubicon-icon-font.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Zocial.ttf</string>
+		<string>AvenirNextLTPro_Bold.otf</string>
+		<string>AvenirNextLTPro_BoldCn.otf</string>
+		<string>AvenirNextLTPro_BoldCnIt.otf</string>
+		<string>AvenirNextLTPro_BoldIt.otf</string>
+		<string>AvenirNextLTPro_Cn.otf</string>
+		<string>AvenirNextLTPro_CnIt.otf</string>
+		<string>AvenirNextLTPro_Demi.otf</string>
+		<string>AvenirNextLTPro_DemiCn.otf</string>
+		<string>AvenirNextLTPro_DemiCnIt.otf</string>
+		<string>AvenirNextLTPro_DemiIt.otf</string>
+		<string>AvenirNextLTPro_Heavy.otf</string>
+		<string>AvenirNextLTPro_HeavyCn.otf</string>
+		<string>AvenirNextLTPro_HeavyCnIt.otf</string>
+		<string>AvenirNextLTPro_HeavyIt.otf</string>
+		<string>AvenirNextLTPro_It.otf</string>
+		<string>AvenirNextLTPro_Medium.otf</string>
+		<string>AvenirNextLTPro_MediumCn.otf</string>
+		<string>AvenirNextLTPro_MediumCnIt.otf</string>
+		<string>AvenirNextLTPro_MediumIt.otf</string>
+		<string>AvenirNextLTPro_Regular.otf</string>
+		<string>AvenirNextLTPro_UltLt.otf</string>
+		<string>AvenirNextLTPro_UltLtCn.otf</string>
+		<string>AvenirNextLTPro_UltLtCnIt.otf</string>
+		<string>AvenirNextLTPro_UltLtIt.otf</string>
+	</array>
 </dict>
 </plist>
