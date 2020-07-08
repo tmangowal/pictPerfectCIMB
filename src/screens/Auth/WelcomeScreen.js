@@ -10,6 +10,7 @@ import WelcomeBG from "../../../assets/images/welcome_bg.png";
 import H1 from "../../components/Text/H1";
 import TextUI from "../../components/Text/TextUI";
 import Button from "../../components/Button/Button";
+import DarkOverlay from "../../components/General/DarkOverlay";
 
 const { height } = Dimensions.get("screen");
 
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
 export default ({ navigation }) => {
   return (
     <ImageBackground style={{ ...styles.bgImage }} source={WelcomeBG}>
+      <DarkOverlay />
       <View style={styles.container}>
         <H1 style={{ fontSize: 44, lineHeight: 50 }} bold>
           Find new friends nearby
