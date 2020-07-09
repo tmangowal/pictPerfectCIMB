@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -14,6 +14,9 @@ import Button from "../../components/Button/Button";
 import LoginBG from "../../../assets/images/signup_bg.png";
 import DarkOverlay from "../../components/General/DarkOverlay";
 import TextUI from "../../components/Text/TextUI";
+import TextInputUI from "../../components/Input/TextInputUI";
+import Axios from "axios";
+import { API_URL } from "../../constants/API";
 
 const styles = StyleSheet.create({
   container: {
@@ -40,6 +43,28 @@ const styles = StyleSheet.create({
 });
 
 export default (props) => {
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const registerBtnHandler = () => {
+    Axios.post(`${API_URL}/users`, {
+      username,
+      fullName,
+      email,
+      password,
+      bio: "No bio yet",
+      profilePicture: "empty",
+    })
+      .then((res) => {
+        console.log(res.data.result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <ImageBackground source={LoginBG} style={{ ...styles.bgImage }}>
       <DarkOverlay />
@@ -50,124 +75,48 @@ export default (props) => {
         >
           <View style={{ ...styles.contentContainer }}>
             <TextUI style={{ ...styles.welcomeText }}>Create an account</TextUI>
-            <View
-              style={{
-                borderRadius: 22,
-                paddingVertical: 11,
-                paddingHorizontal: 20,
-                justifyContent: "center",
+            <TextInputUI
+              autoCapitalize="none"
+              onChangeText={(text) => setUsername(text)}
+              placeholderTextColor="lightgrey"
+              containerStyle={{
                 marginTop: 58,
               }}
-            >
-              <View
-                style={{
-                  backgroundColor: "white",
-                  opacity: 0.2,
-                  borderRadius: 22,
-                  ...StyleSheet.absoluteFillObject,
-                }}
-              />
-              <TextInput
-                autoCapitalize="none"
-                placeholderTextColor="lightgrey"
-                style={{
-                  fontFamily: "AvenirNextLTPro-Regular",
-                  fontSize: 17,
-                  color: "white",
-                  lineHeight: 19,
-                }}
-                placeholder="Username"
-              />
-            </View>
-            <View
-              style={{
-                borderRadius: 22,
-                paddingVertical: 11,
-                paddingHorizontal: 20,
-                justifyContent: "center",
+              placeholder="Username"
+            />
+            <TextInputUI
+              autoCapitalize="none"
+              onChangeText={(text) => setFullName(text)}
+              placeholderTextColor="lightgrey"
+              containerStyle={{
                 marginTop: 10,
               }}
-            >
-              <View
-                style={{
-                  backgroundColor: "white",
-                  opacity: 0.2,
-                  borderRadius: 22,
-                  ...StyleSheet.absoluteFillObject,
-                }}
-              />
-              <TextInput
-                autoCapitalize="none"
-                placeholderTextColor="lightgrey"
-                style={{
-                  fontFamily: "AvenirNextLTPro-Regular",
-                  fontSize: 17,
-                  color: "white",
-                  lineHeight: 19,
-                }}
-                placeholder="Name"
-              />
-            </View>
-            <View
-              style={{
-                borderRadius: 22,
-                paddingVertical: 11,
-                paddingHorizontal: 20,
-                justifyContent: "center",
+              placeholder="Full Name"
+            />
+            <TextInputUI
+              autoCapitalize="none"
+              onChangeText={(text) => setEmail(text)}
+              placeholderTextColor="lightgrey"
+              containerStyle={{
                 marginTop: 10,
               }}
-            >
-              <View
-                style={{
-                  backgroundColor: "white",
-                  opacity: 0.2,
-                  borderRadius: 22,
-                  ...StyleSheet.absoluteFillObject,
-                }}
-              />
-              <TextInput
-                autoCapitalize="none"
-                placeholderTextColor="lightgrey"
-                style={{
-                  fontFamily: "AvenirNextLTPro-Regular",
-                  fontSize: 17,
-                  color: "white",
-                  lineHeight: 19,
-                }}
-                placeholder="Email"
-              />
-            </View>
-            <View
-              style={{
-                borderRadius: 22,
-                paddingVertical: 11,
-                paddingHorizontal: 20,
-                justifyContent: "center",
+              placeholder="Email"
+            />
+            <TextInputUI
+              autoCapitalize="none"
+              onChangeText={(text) => setPassword(text)}
+              placeholderTextColor="lightgrey"
+              containerStyle={{
                 marginTop: 10,
               }}
+              placeholder="Password"
+              secureTextEntry
+            />
+            <Button
+              onPress={registerBtnHandler}
+              containerStyle={{ marginTop: 40 }}
+              size="lg"
             >
-              <View
-                style={{
-                  backgroundColor: "white",
-                  opacity: 0.2,
-                  borderRadius: 22,
-                  ...StyleSheet.absoluteFillObject,
-                }}
-              />
-              <TextInput
-                secureTextEntry
-                autoCapitalize="none"
-                placeholderTextColor="lightgrey"
-                style={{
-                  fontFamily: "AvenirNextLTPro-Regular",
-                  fontSize: 17,
-                  color: "white",
-                  lineHeight: 19,
-                }}
-                placeholder="Password"
-              />
-            </View>
-            <Button containerStyle={{ marginTop: 40 }} size="lg">
               SIGN UP
             </Button>
           </View>

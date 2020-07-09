@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     borderRadius: 22,
     paddingVertical: 11,
     paddingHorizontal: 20,
+    justifyContent: "center",
   },
   bg: {
     backgroundColor: "white",
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
   textInput: {
     fontFamily: "AvenirNextLTPro-Regular",
     fontSize: 17,
-    lineHeight: 22,
+    lineHeight: 19,
     color: "white",
   },
 });
@@ -27,6 +28,8 @@ export default ({
   placeholder,
   value,
   keyboardType,
+  autoCapitalize,
+  secureTextEntry,
 }) => {
   return (
     <View
@@ -49,6 +52,8 @@ export default ({
         placeholderTextColor="lightgrey"
         value={value}
         keyboardType={keyboardType}
+        autoCapitalize={autoCapitalize}
+        secureTextEntry={secureTextEntry}
       />
     </View>
   );

@@ -6,6 +6,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthStack from "./src/navigators/AuthStack";
 import * as SplashScreen from "expo-splash-screen";
+import { createStore, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
+import { Provider } from "react-redux";
+import reducers from "./src/redux/reducers";
+
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 // SplashScreen.hideAsync();
 
@@ -13,11 +19,13 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Auth" component={AuthStack} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Auth" component={AuthStack} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

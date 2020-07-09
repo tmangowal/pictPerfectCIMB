@@ -11,6 +11,7 @@ import H1 from "../../components/Text/H1";
 import TextUI from "../../components/Text/TextUI";
 import Button from "../../components/Button/Button";
 import DarkOverlay from "../../components/General/DarkOverlay";
+import { useSelector } from "react-redux";
 
 const { height } = Dimensions.get("screen");
 
