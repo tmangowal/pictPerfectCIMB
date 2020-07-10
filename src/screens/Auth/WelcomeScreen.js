@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,7 +11,8 @@ import H1 from "../../components/Text/H1";
 import TextUI from "../../components/Text/TextUI";
 import Button from "../../components/Button/Button";
 import DarkOverlay from "../../components/General/DarkOverlay";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const { height } = Dimensions.get("screen");
 
@@ -52,3 +53,7 @@ export default ({ navigation }) => {
     </ImageBackground>
   );
 };
+
+// 1. pull
+// 2. npm install
+// 3. react-native link

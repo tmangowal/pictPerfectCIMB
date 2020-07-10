@@ -16,6 +16,8 @@ import DarkOverlay from "../../components/General/DarkOverlay";
 import TextUI from "../../components/Text/TextUI";
 import Axios from "axios";
 import { API_URL } from "../../constants/API";
+import { useDispatch, useSelector } from "react-redux";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const styles = StyleSheet.create({
   container: {
@@ -45,6 +47,9 @@ export default (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+  const userSelector = useSelector((state) => state.user);
+
   const loginBtnHandler = () => {
     Axios.get(`${API_URL}/users/login`, {
       params: {
@@ -53,7 +58,35 @@ export default (props) => {
       },
     })
       .then((res) => {
-        console.log(res.data);
+        const {
+          bio,
+          fullName,
+          email,
+          username,
+          profilePicture,
+          id,
+        } = res.data.result;
+
+        AsyncStorage.setItem(
+          "userData",
+          JSON.stringify({
+            bio,
+            fullName,
+            email,
+            username,
+            profilePicture,
+            id,
+          })
+        )
+          .then(() => {
+            dispatch({
+              type: "USER_LOGIN",
+              payload: { bio, fullName, email, username, profilePicture, id },
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -69,7 +102,9 @@ export default (props) => {
           style={{ justifyContent: "center", flex: 1 }}
         >
           <View style={{ ...styles.contentContainer }}>
-            <TextUI style={{ ...styles.welcomeText }}>Welcome Back</TextUI>
+            <TextUI style={{ ...styles.welcomeText }}>
+              Welcome Back {userSelector.username}
+            </TextUI>
             <TextUI style={{ ...styles.loginText }}>
               Login to your account
             </TextUI>
