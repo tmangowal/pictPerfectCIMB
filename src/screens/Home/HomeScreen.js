@@ -1,38 +1,60 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  FlatList,
+  SafeAreaView,
+} from "react-native";
 import H1 from "../../components/Text/H1";
 import TextUI from "../../components/Text/TextUI";
 import Tagline from "../../components/Text/Tagline";
 import Colors from "../../constants/Colors";
 import PostCard from "./PostCard";
+import Axios from "axios";
+import { API_URL } from "../../constants/API";
 
 const { width } = Dimensions.get("screen");
 
 const styles = StyleSheet.create({});
 
 export default ({ navigation }) => {
+  const [postList, setPostList] = useState([]);
+
+  useEffect(() => {
+    Axios.get(`${API_URL}/posts`, {
+      params: {
+        include: "User",
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setPostList(res.data.result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const renderPosts = ({ item }) => {
+    return <PostCard data={item} />;
+  };
+
   return (
     <View
       style={{
-        justifyContent: "center",
         flex: 1,
         backgroundColor: Colors.backgroundColor,
       }}
     >
-      <PostCard />
-      {/* <Image
-        source={{
-          uri:
-            "https://pict-perfect.ap-south-1.linodeobjects.com/POST-1594348157281.jpeg",
-        }}
-        style={{
-          width: undefined,
-          height: undefined,
-          borderRadius: 6,
-          flex: 1,
-          maxHeight: 500,
-        }}
-      /> */}
+      <SafeAreaView />
+      <FlatList
+        data={postList}
+        renderItem={renderPosts}
+        keyExtractor={(item) => item.id.toString()}
+      />
     </View>
   );
 };

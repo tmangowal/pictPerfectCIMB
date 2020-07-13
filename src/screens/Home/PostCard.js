@@ -26,14 +26,13 @@ export default ({ navigation, data }) => {
         },
         shadowOpacity: 0.5,
         shadowRadius: 8,
-
         elevation: 6,
+        marginVertical: 10,
       }}
     >
       <Image
         source={{
-          uri:
-            "https://pict-perfect.ap-south-1.linodeobjects.com/POST-1594348157281.jpeg",
+          uri: data.photoURL,
         }}
         style={{
           borderRadius: 6,
@@ -42,13 +41,11 @@ export default ({ navigation, data }) => {
       />
       <View style={{ paddingHorizontal: 13 }}>
         <TextUI style={{ marginTop: 10 }} bold>
-          Username
+          {data.User.username}
         </TextUI>
         <Tagline>2 Hours Ago</Tagline>
         <TextUI size="sm" style={{ marginTop: 11 }}>
-          Coventry is a city with a thousand years of history that has plenty to
-          offer the visiting tourist. Located in the heart of Warwickshire,
-          which is well-known as Shakespeare’s county.
+          {data.caption}
         </TextUI>
       </View>
     </View>
