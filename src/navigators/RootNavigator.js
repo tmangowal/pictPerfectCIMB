@@ -4,6 +4,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AuthStack from "./AuthStack";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
+import TestScreen from "../screens/TestScreen";
+import HomeScreen from "../screens/Home/HomeScreen";
 
 const Stack = createStackNavigator();
 
@@ -24,12 +26,17 @@ export default () => {
       .catch((err) => {
         console.log(err);
       });
+    // AsyncStorage.removeItem("userData");
   }, []);
 
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Auth" component={AuthStack} />
+        {userSelector.id ? (
+          <Stack.Screen name="Home" component={HomeScreen} />
+        ) : (
+          <Stack.Screen name="Auth" component={AuthStack} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
