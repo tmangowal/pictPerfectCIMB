@@ -1,0 +1,56 @@
+import React from "react";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
+import H1 from "../../components/Text/H1";
+import TextUI from "../../components/Text/TextUI";
+import Tagline from "../../components/Text/Tagline";
+import Colors from "../../constants/Colors";
+import Image from "react-native-scalable-image";
+
+const { width } = Dimensions.get("screen");
+
+const styles = StyleSheet.create({});
+
+export default ({ navigation, data }) => {
+  return (
+    <View
+      style={{
+        backgroundColor: Colors.backgroundColor,
+        width: width - 30,
+        marginHorizontal: 15,
+        borderRadius: 6,
+        paddingBottom: 25,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 3,
+        },
+        shadowOpacity: 0.5,
+        shadowRadius: 8,
+
+        elevation: 6,
+      }}
+    >
+      <Image
+        source={{
+          uri:
+            "https://pict-perfect.ap-south-1.linodeobjects.com/POST-1594348157281.jpeg",
+        }}
+        style={{
+          borderRadius: 6,
+        }}
+        width={width - 30}
+      />
+      <View style={{ paddingHorizontal: 13 }}>
+        <TextUI style={{ marginTop: 10 }} bold>
+          Username
+        </TextUI>
+        <Tagline>2 Hours Ago</Tagline>
+        <TextUI size="sm" style={{ marginTop: 11 }}>
+          Coventry is a city with a thousand years of history that has plenty to
+          offer the visiting tourist. Located in the heart of Warwickshire,
+          which is well-known as Shakespeare’s county.
+        </TextUI>
+      </View>
+    </View>
+  );
+};
