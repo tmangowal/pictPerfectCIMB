@@ -8,6 +8,7 @@ import {
   FlatList,
   SafeAreaView,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import H1 from "../../components/Text/H1";
 import TextUI from "../../components/Text/TextUI";
@@ -52,7 +53,8 @@ const SearchBar = (props) => {
           placeholderTextColor="#4E586E"
         />
       </View>
-      <View
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate("CreatePost")}
         style={{
           marginTop: 4,
           borderRadius: 500,
@@ -69,7 +71,7 @@ const SearchBar = (props) => {
           type="Ionicons"
           name="ios-add"
         />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -104,7 +106,7 @@ export default ({ navigation }) => {
       }}
     >
       <SafeAreaView />
-      <SearchBar />
+      <SearchBar navigation={navigation} />
       <FlatList
         ListHeaderComponent={() => {
           return <H1 bold>Posts</H1>;

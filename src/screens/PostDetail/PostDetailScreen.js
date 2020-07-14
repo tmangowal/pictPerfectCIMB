@@ -18,6 +18,7 @@ import { Icon } from "native-base";
 import Header from "../../components/General/Header";
 import Image from "react-native-scalable-image";
 import PlaceholderImg from "../../../assets/images/login_bg.png";
+import Axios from "axios";
 
 const { width } = Dimensions.get("screen");
 
@@ -35,7 +36,8 @@ const styles = StyleSheet.create({
 });
 
 export default (props) => {
-  // const { postData } = props.route.params;
+  const { postDetailData } = props.route.params;
+  console.log("POST DETAIL: ", postDetailData);
 
   return (
     <View
@@ -45,18 +47,16 @@ export default (props) => {
       }}
     >
       <SafeAreaView />
-      <Header {...props} title="username" />
+      <Header {...props} title={postDetailData.User.username} />
       <ScrollView style={{ flex: 1 }}>
         <Image
           style={{ maxHeight: 540 }}
           width={width}
-          source={PlaceholderImg}
+          source={{ uri: postDetailData.photoURL }}
         />
         <View style={{ ...styles.commentContainer }}>
           <TextUI size="sm" style={{ height: null }}>
-            Since the introduction of Virtual Game, it has been achieving great
-            heights so far as its popularity and technological advancement are
-            concerned. The history of video game is as interesting as a fairy.
+            {postDetailData.caption}
           </TextUI>
         </View>
       </ScrollView>

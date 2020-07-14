@@ -97,7 +97,9 @@ export default ({ navigation, data }) => {
               1125
             </TextUI>
             <TouchableOpacity
-              onPress={() => navigation.navigate("HomePostDetail")}
+              onPress={() =>
+                navigation.navigate("HomePostDetail", { postDetailData: data })
+              }
               style={{
                 flexDirection: "row",
                 alignItems: "center",
