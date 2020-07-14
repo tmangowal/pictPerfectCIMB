@@ -23,6 +23,8 @@ import PlaceholderImg from "../../../assets/images/login_bg.png";
 import Axios from "axios";
 import Button from "../../components/Button/Button";
 import * as ImagePicker from "expo-image-picker";
+import { useSelector } from "react-redux";
+import { API_URL } from "../../constants/API";
 
 const { width } = Dimensions.get("screen");
 
@@ -40,12 +42,20 @@ const styles = StyleSheet.create({
 });
 
 export default (props) => {
+  const userSelector = useSelector((state) => state.user);
+
   const [selectedImage, setSelectedImage] = useState(null);
 
   const openImagePicker = () => {
     ImagePicker.launchImageLibraryAsync()
       .then((result) => {
         console.log(result);
+        const localUri = result.uri;
+        const filename = localUri.split("/").pop();
+        // Infer the type of the image
+        const match = /\.(\w+)$/.exec(filename);
+        const types = match ? `image/${match[1]}` : `image`;
+        setSelectedImage({ uri: localUri, name: filename, type: types });
       })
       .catch((err) => {
         console.log(err);
@@ -65,6 +75,38 @@ export default (props) => {
     }
   };
 
+  const renderImage = () => {
+    if (selectedImage) {
+      return <Image source={{ uri: selectedImage.uri }} width={120} />;
+    }
+
+    return (
+      <View
+        style={{ borderColor: "gray", borderWidth: 1, height: 120, width: 120 }}
+      />
+    );
+  };
+
+  const uploadHandler = () => {
+    let formData = new FormData();
+    formData.append("photo", selectedImage);
+    formData.append(
+      "data",
+      JSON.stringify({
+        caption: "This is a caption for my post",
+        UserId: userSelector.id,
+        location: "Home",
+      })
+    );
+    Axios.post(`${API_URL}/posts`, formData)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     askPermission();
   }, []);
@@ -74,12 +116,23 @@ export default (props) => {
       style={{
         flex: 1,
         backgroundColor: Colors.backgroundColor,
+        paddingHorizontal: 15,
+        alignItems: "center",
       }}
     >
       <SafeAreaView />
       <Header {...props} title="Create Post" />
-      <Text>Create Post</Text>
-      <Button onPress={openImagePicker}>Upload Post</Button>
+      {renderImage()}
+      <Button containerStyle={{ marginTop: 20 }} onPress={openImagePicker}>
+        Pick Image
+      </Button>
+      <Button
+        containerStyle={{ marginTop: 12 }}
+        type="secondary"
+        onPress={uploadHandler}
+      >
+        Upload Post
+      </Button>
     </View>
   );
 };

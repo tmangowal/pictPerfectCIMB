@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
 });
 
 export default ({ navigation, data }) => {
+  console.log(data.User);
   return (
     <View
       style={{
