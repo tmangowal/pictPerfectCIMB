@@ -1,14 +1,29 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import H1 from "../../components/Text/H1";
 import TextUI from "../../components/Text/TextUI";
 import Tagline from "../../components/Text/Tagline";
 import Colors from "../../constants/Colors";
-import Image from "react-native-scalable-image";
+import ImageScale from "react-native-scalable-image";
+import { Icon } from "native-base";
+
+import PlaceholderProfPic from "../../../assets/images/signup_bg.png";
 
 const { width } = Dimensions.get("screen");
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  likeBtn: {
+    fontSize: 22,
+    color: "white",
+  },
+});
 
 export default ({ navigation, data }) => {
   return (
@@ -18,7 +33,6 @@ export default ({ navigation, data }) => {
         width: width - 30,
         marginHorizontal: 15,
         borderRadius: 6,
-        paddingBottom: 25,
         shadowColor: "#000",
         shadowOffset: {
           width: 0,
@@ -30,23 +44,99 @@ export default ({ navigation, data }) => {
         marginVertical: 10,
       }}
     >
-      <Image
+      <ImageScale
         source={{
           uri: data.photoURL,
         }}
         style={{
-          borderRadius: 6,
+          borderTopLeftRadius: 6,
+          borderTopRightRadius: 6,
         }}
         width={width - 30}
       />
       <View style={{ paddingHorizontal: 13 }}>
-        <TextUI style={{ marginTop: 10 }} bold>
-          {data.User.username}
-        </TextUI>
-        <Tagline>2 Hours Ago</Tagline>
-        <TextUI size="sm" style={{ marginTop: 11 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 11,
+          }}
+        >
+          <Image
+            source={PlaceholderProfPic}
+            style={{ width: 40, height: 40, borderRadius: 500 }}
+          />
+          <View style={{ marginLeft: 10 }}>
+            <TextUI style={{ marginBottom: 4 }} bold>
+              {data.User.username}
+            </TextUI>
+            <Tagline>2 Hours Ago</Tagline>
+          </View>
+        </View>
+        <TextUI size="sm" style={{ marginTop: 11, height: null }}>
           {data.caption}
         </TextUI>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 25,
+            paddingBottom: 75,
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Icon style={{ ...styles.likeBtn }} type="AntDesign" name="heart" />
+            <TextUI
+              size="sm"
+              style={{
+                marginLeft: 8,
+                textAlignVertical: "bottom",
+              }}
+            >
+              1125
+            </TextUI>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("HomePostDetail")}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginLeft: 22,
+              }}
+            >
+              <Icon
+                style={{ ...styles.likeBtn }}
+                type="MaterialIcons"
+                name="chat"
+              />
+              <TextUI
+                size="sm"
+                style={{
+                  marginLeft: 8,
+                  textAlignVertical: "bottom",
+                }}
+              >
+                348
+              </TextUI>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Icon
+              style={{ ...styles.likeBtn, marginLeft: 22 }}
+              type="Foundation"
+              name="share"
+            />
+            <TextUI
+              size="sm"
+              style={{
+                marginLeft: 8,
+                textAlignVertical: "bottom",
+              }}
+            >
+              348
+            </TextUI>
+          </View>
+        </View>
       </View>
     </View>
   );

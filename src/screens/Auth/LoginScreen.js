@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontFamily: "AvenirNextLTPro-Heavy",
     fontSize: 34,
-    lineHeight: 40,
+    height: 34,
   },
   loginText: {
     marginTop: 12,

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthStack from "./AuthStack";
@@ -6,6 +7,8 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import TestScreen from "../screens/TestScreen";
 import HomeScreen from "../screens/Home/HomeScreen";
+import PostDetailScreen from "../screens/PostDetail/PostDetailScreen";
+import HomeStack from "./HomeStack";
 
 const Stack = createStackNavigator();
 
@@ -31,9 +34,14 @@ export default () => {
 
   return (
     <NavigationContainer>
+      <StatusBar style="light" />
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {userSelector.id ? (
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen
+            options={{ animationEnabled: false }}
+            name="HomeStack"
+            component={HomeStack}
+          />
         ) : (
           <Stack.Screen name="Auth" component={AuthStack} />
         )}

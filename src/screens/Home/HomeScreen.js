@@ -7,6 +7,7 @@ import {
   Dimensions,
   FlatList,
   SafeAreaView,
+  TextInput,
 } from "react-native";
 import H1 from "../../components/Text/H1";
 import TextUI from "../../components/Text/TextUI";
@@ -15,10 +16,63 @@ import Colors from "../../constants/Colors";
 import PostCard from "./PostCard";
 import Axios from "axios";
 import { API_URL } from "../../constants/API";
+import { Icon } from "native-base";
 
 const { width } = Dimensions.get("screen");
 
 const styles = StyleSheet.create({});
+
+const SearchBar = (props) => {
+  return (
+    <View
+      style={{
+        paddingHorizontal: 15,
+        flexDirection: "row",
+        alignItems: "center",
+        paddingVertical: 6,
+      }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          borderRadius: 18,
+          backgroundColor: "rgba(142, 142, 147, 0.12);",
+          flex: 1,
+        }}
+      >
+        <Icon
+          style={{ fontSize: 24, color: "white", marginLeft: 15 }}
+          type="Feather"
+          name="search"
+        />
+        <TextInput
+          style={{ paddingVertical: 10, marginLeft: 8 }}
+          placeholder="Search"
+          placeholderTextColor="#4E586E"
+        />
+      </View>
+      <View
+        style={{
+          marginTop: 4,
+          borderRadius: 500,
+          backgroundColor: Colors.primaryColor,
+          height: 44,
+          width: 44,
+          alignItems: "center",
+          justifyContent: "center",
+          marginLeft: 15,
+        }}
+      >
+        <Icon
+          style={{ fontSize: 42, color: "white" }}
+          type="Ionicons"
+          name="ios-add"
+        />
+      </View>
+    </View>
+  );
+};
 
 export default ({ navigation }) => {
   const [postList, setPostList] = useState([]);
@@ -39,7 +93,7 @@ export default ({ navigation }) => {
   }, []);
 
   const renderPosts = ({ item }) => {
-    return <PostCard data={item} />;
+    return <PostCard navigation={navigation} data={item} />;
   };
 
   return (
@@ -50,7 +104,13 @@ export default ({ navigation }) => {
       }}
     >
       <SafeAreaView />
+      <SearchBar />
       <FlatList
+        ListHeaderComponent={() => {
+          return <H1 bold>Posts</H1>;
+        }}
+        ListHeaderComponentStyle={{ marginHorizontal: 15 }}
+        contentContainerStyle={{ marginTop: 46 }}
         data={postList}
         renderItem={renderPosts}
         keyExtractor={(item) => item.id.toString()}

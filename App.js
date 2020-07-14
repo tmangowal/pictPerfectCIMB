@@ -22,6 +22,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <Provider store={store}>
+      {/* <StatusBar style="light" /> */}
       <RootNavigator />
     </Provider>
   );
