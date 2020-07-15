@@ -30,7 +30,7 @@ export default ({ children, style, accent, bold, size }) => {
         ...styles.text,
         color: accent ? "#F54B64" : "#FFFFFF",
         fontFamily,
-        fontSize: 15,
+        fontSize,
         textAlignVertical: "center",
         height: fontSize,
         ...style,

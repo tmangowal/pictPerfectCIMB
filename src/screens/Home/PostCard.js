@@ -48,6 +48,7 @@ export default ({ navigation, data }) => {
       <ImageScale
         source={{
           uri: data.photoURL,
+          // uri: "https://picsum.photos/200/300.jpg",
         }}
         style={{
           borderTopLeftRadius: 6,
